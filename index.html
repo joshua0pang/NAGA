@@ -64,6 +64,7 @@
 		{
 			growSnake();
 			score -= 10000;
+			createFood();
 		}
 		score -= 1000;
 	
@@ -149,9 +150,9 @@
 			{
 				break;
 			}
-			if(n == 300)
+			if(n == 300000)//don't play more than 5 mins
 			{
-			break;
+				break;
 			}
 		}while(true);
 		console.log("game over");
