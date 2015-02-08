@@ -1,219 +1,168 @@
+
 <!DOCTYPE html>
 <head>
-  <title>My Game</title>
+  <title>NAGA</title>
   <meta charset="utf-8">
+  <script src="jquery-1.11.2.js"></script> 
 </head>
 <body>
-  <canvas id="canvas" width = "800" height = "600" style="border: solid black;">
-	console.log("Sup");  
+  <canvas id="canvas" width=600 height=400>
+  	Empty Canvas Begone!
   </canvas>
   <script>
-	var snake_arrayX = [];
-	var snake_arrayY = [];
-	var foodX;
-	var foodY;
-	var borderX = 80;
-	var borderY = 60;
-	var score = 1000000;
-	var highScore = 900000;
-	var direction = "R";
-	var d = new Date();
-	var n = d.getTime();
-	var m = d.getTime();
-	
-	function collision(x, y)
-	{
-		if (x < 0 || x > borderX || y < 0 || y > borderY)
-		{
-			return true;
-		}
-		for (var i = 0; i < snake_arrayX.length; i++)
-		{
-			if (snake_arrayX[i] == x && snake_arrayY[i] == y)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	function createFood()
-	{
-		var xTemp = Math.random()*x;
-		var yTemp = Math.random()*y;
-		while (collision(xTemp, yTemp))
-		{
-			xTemp = Math.random()*x;
-			yTemp = Math.random()*y;
-		}
-		foodX = xTemp;
-		foodY = yTemp;
-	}
-	function growSnake()
-	{
-		//add new value to end
-		snake_arrayX.push(0);
-		snake_arrayY.push(0);
-	}
-	function move(x, y)
-	{
-		if (collision(x,y))
-		{
-			return false; //game over
-		}
-		else if(x == foodX && y == foodY)
-		{
-			growSnake();
-			score -= 10000;
-			createFood();
-		}
-		score -= 1000;
-	
-		for(var i = snake_arrayX.length - 1; i > 0; i--)
-		{
-			snake_arrayX[i] = snake_arrayX[i-1];
-			snake_arrayY[i] = snake_arrayY[i-1];
-		}
-		snake_arrayX[0] = x;
-		snake_arrayY[0] = y;
-		return true;
-	}
-	function draw()
-	{
-		//iterate graph
-		for (var i = 0; i < borderY; i++)
-		{
-			for (var j = 0; j < borderX; j++)
-			{
-				for(var k = 0; k < snake_arrayX.length; k++)
-				{
-					if(j == snake_arrayX[k] && i == snake_arrayY[k])
-					{
-						console.log("S");
-					}
-				}
-				if(j == foodX && i == foodY)
-				{
-					console.log("A");
-				}
-				else
-				{
-					console.log(" ");
-				}
-			}
-			console.log("/n");
-		}
-		console.log("/n");
-		console.log("high score: " + highScore + "/n");
-		console.log("score: " + score + "/n");
-	}
-	
-	function initialize()
-	{
-		snake_arrayX.push(0, 1, 2, 3, 4);
-		snake_arrayY.push(0, 0, 0, 0, 0);
-		createFood();
-		draw();
-		direction = "R";
-	}
-	
-	function game_loop()
-	{
-		do
-		{
-			n = d.getTime();
-			do
-			{
-				//check for input
-				m = d.getTime();
-			}while((m - n) < 60);
-			var a = snake_arrayX.peek();
-			var b = snake_arrayY.peek();
-			if(direction == "R")
-			{
-				a++;	
-			}
-			else if(direction == "L")
-			{
-				a--;
-			}
-			else if(direction == "U")
-			{
-				b--;
-			}
-			else
-			{
-				b++;
-			}
-			draw();
-			n = m = d.getTime();
-			if(!move(a, b))
-			{
-				break;
-			}
-			if(n == 300000)//don't play more than 5 mins
-			{
-				break;
-			}
-		}while(true);
-		console.log("game over");
-		if(score < highScore)
-		{
-			highScore = score;
-		}
+$(document).ready(function () {
+    var canvas = $("#canvas")[0];
+    var ctx = canvas.getContext("2d");
+    var w = $("#canvas").width();
+    var h = $("#canvas").height();
 
-	}
-	
-	
-	var RIGHT_KEY_CODE = 68;
-	var LEFT_KEY_CODE = 65;
-	var UP_KEY_CODE = 87;
-	var DOWN_KEY_CODE = 83;
-	
-	var keysPressed = {};
-	keysPressed[RIGHT_KEY_CODE] = false;
-	keysPressed[LEFT_KEY_CODE] = false;
-	keysPressed[UP_KEY_CODE] = false;
-	keysPressed[DOWN_KEY_CODE] = false;
-	
-	    if (keysPressed[RIGHT_KEY_CODE])
-	    {
-	    	direction = "R";
-	    }
-	    if (keysPressed[LEFT_KEY_CODE]) 
-	    {
-	    	direction = "L";
-	    }
-	    if (keysPressed[UP_KEY_CODE])
-	    {
-	    	direction = "U";
-	    }
-	    if (keysPressed[DOWN_KEY_CODE])
-	    {
-	    	direction = "D";
-	    }
-	
-	function keyDown(e) {
-	    if ( e.keyCode in keysPressed ) keysPressed[e.keyCode] = true;
-	}
-	
-	function keyUp(e) {
-	    if ( e.keyCode in keysPressed ) keysPressed[e.keyCode] = false;
-	}
-	
-	document.addEventListener( 'keydown', keyDown, false );
-	document.addEventListener( 'keyup', keyUp, false );
-	
-	game_loop();
-	
-	/*
-	document.keydown(function(e){
-		var key = e.which;
-		//We will add another clause to prevent reverse gear
-		if(key == "37" && d != "R") d = "L";
-		else if(key == "38" && d != "D") d = "U";
-		else if(key == "39" && d != "L") d = "R";
-		else if(key == "40" && d != "U") d = "D";
-		//The snake is now keyboard controllable
-	*/
-  </script>
+    var cw = 10;
+    var d;
+    var food;
+    var soma;
+    var score;
+
+    var snake_array; 
+
+    function init() {
+        d = "right"; 
+        create_snake();
+        create_food(); 
+        create_soma();
+        score = 0;
+
+        if (typeof game_loop != "undefined") clearInterval(game_loop);
+        game_loop = setInterval(paint, 60);
+    }
+    init();
+
+    function create_snake() {
+        var length = 5; 
+        snake_array = []; 
+        for (var i = length - 1; i >= 0; i--) {
+            snake_array.push({
+                x: i,
+                y: 0
+            });
+        }
+    }
+
+    function create_food() {
+        food = {
+            x: Math.round(Math.random() * (w - cw) / cw),
+            y: Math.round(Math.random() * (h - cw) / cw),
+        };
+    }
+    
+    function create_soma() {
+        soma = {
+            x: w/2,
+            y: h/2,
+        };
+    }
+
+    function paint() {
+        ctx.fillStyle = "MidnightBlue";
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = "MediumSpringGreen";
+        ctx.strokeRect(0, 0, w, h);
+
+        var nx = snake_array[0].x;
+        var ny = snake_array[0].y;
+        if (d == "right") nx++;
+        else if (d == "left") nx--;
+        else if (d == "up") ny--;
+        else if (d == "down") ny++;
+
+     
+        if (nx == -1 || nx == w / cw || ny == -1 || ny == h / cw || check_collision(nx, ny, snake_array)) {
+            init();
+            return;
+        }
+
+        
+        if (nx == food.x && ny == food.y) {
+            //snake_array.length /= 2;
+            var tail = snake_array.pop(); 
+            for (i = 0; i < snake_array.length; i++) {
+                tail = snake_array.pop();
+            }
+            tail.x = nx;
+            tail.y = ny;
+            create_food();
+            score += 100;
+            snake_array.unshift(tail); 
+ 		if (nx == soma.x && ny == soma.y) {
+            var tail = snake_array.push(); 
+            for (i = 0; i < snake_array.length / 2; i++) {
+                tail = snake_array.push();
+            }
+            tail.x = nx;
+            tail.y = ny;
+            create_food();
+            score += 100;
+            snake_array.unshift(tail); 
+
+        }            
+
+        } else {
+            var tail = {
+                x: nx,
+                y: ny
+            };
+            score++;
+            snake_array.unshift(tail); 
+        }
+
+
+        for (var i = 0; i < snake_array.length; i++) {
+            var c = snake_array[i];
+            paint_cell(c.x, c.y);
+        }
+
+        paint_cell(food.x, food.y);
+        paint_soma(soma.x, soma.y);
+
+        var score_text = "Score: " + score;
+        ctx.fillText(score_text, 5, h - 5);
+    }
+
+    function paint_cell(x, y) {
+        ctx.fillStyle = "Lime";
+        ctx.fillRect(x * cw, y * cw, cw, cw);
+        ctx.strokeStyle = "MediumOrchid";
+        ctx.strokeRect(x * cw, y * cw, cw, cw);
+    }
+
+    function paint_soma(x, y) {
+        ctx.fillStyle = "Lime";
+        ctx.fillRect(x * cw, y * cw, cw, cw);
+        ctx.strokeStyle = "MediumOrchid";
+        ctx.strokeRect(x * cw, y * cw, cw, cw);
+    }
+
+    function check_collision(x, y, array) {
+
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].x == x && array[i].y == y) return true;
+        }
+        return false;
+    }
+
+    $(document).keydown(function (e) {
+        var key = e.which;
+        if (key == "65" && d != "right") d = "left";
+        else if (key == "87" && d != "down") d = "up";
+        else if (key == "68" && d != "left") d = "right";
+        else if (key == "83" && d != "up") d = "down";
+    })
+
+
+
+
+
+
+
+})
+</script> 
 </body>
