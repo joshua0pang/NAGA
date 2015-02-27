@@ -1,9 +1,9 @@
 # NAGA
-This game is inspired by calculator snake games from my High School Algebra type classes.
-
-I am hoping to make it work in the console only, but in the canvas is okay if only way.
-
-Included in failures is a proof of concept remix of the snake game Dr. Jhala posted. I think I called it EKANS which is snake backwards.
+I am fascinated by the NAGA culture throughout southeast asia. Naga means snake, in Sanskrit it looks like this: नाग. There is a strong correlation betwen NAGA culture and water people on sailing ships.
 
 Also see here:
 http://jsfiddle.net/joshua0pang/2qwgnxhg/
+
+An assignment for CMPM 20 Winter 2015 with Arnav Jhala.
+See the original of which this is a remix.
+http://thecodeplayer.com/walkthrough/html5-game-tutorial-make-a-snake-game-using-html5-canvas-jquery
