@@ -10,6 +10,7 @@ http://thecodeplayer.com/walkthrough/html5-game-tutorial-make-a-snake-game-using
 
 // Instructions to download:
 1. Download the compressed file.
-2. Decompress with standard software (Google if you don't know).
+2. Decompress with standard software 
+  2.1 You may already have decompression software installed — Google it if you don'ty.
 3. Go to the NAGA folder, double click index.html
 4. Voila
