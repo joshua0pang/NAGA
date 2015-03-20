@@ -9,7 +9,7 @@ See the original of which this is a remix.
 http://thecodeplayer.com/walkthrough/html5-game-tutorial-make-a-snake-game-using-html5-canvas-jquery
 
 // Instructions to download:
-1. Download the compressed file.
+1. Download the compressed file on the right-hand side of your screen, "Download ZIP".
 2. Decompress with standard software 
   2.1 You may already have decompression software installed — Google it if you don't.
 3. Go to the NAGA folder, double click index.html
