@@ -1,5 +1,5 @@
 # NAGA
-I am fascinated by the NAGA culture throughout southeast asia. Naga means snake, in Sanskrit it looks like this: नाग. There is a strong correlation betwen NAGA culture and water people on sailing ships.
+Like R. Buckminster Fuller, I am fascinated by the NAGA culture throughout southeast asia. Naga means snake, in Sanskrit it looks like this: नाग. There is a strong correlation betwen NAGA culture and water people on sailing ships.
 
 Also see here:
 http://jsfiddle.net/joshua0pang/2qwgnxhg/
